@@ -4,11 +4,14 @@
 <meta charset="utf-8"/>
 <title>ICLC 2016 Workshop: Design a Mini-Language</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/vendor/bootstrap/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/skeleton.css">
 <link rel="stylesheet" href="css/codemirror.css">
 <link rel="stylesheet" href="css/github.min.css">
+
+<link rel="stylesheet" href="assets/css/main.css">
 
 <script src="js/jquery.min.js"></script>
 
@@ -864,9 +867,77 @@ This workshop is an example of [Language-oriented programming](https://en.wikipe
 		
 		</div>
 	</div>
+  <div class="row">
+    <div class="full column">
+      <div class="hoodie-accountbar">
+        <div class='account-bar-container'>
+          <div class="hoodie-account-signedout">
+            <span class="btn-group">
+              <button class="btn btn-small btn-primary" data-hoodie-action="signup">Sign Up</button>
+              <button class="btn btn-small dropdown-toggle btn-primary" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="#" data-hoodie-action="signin">Sign In</a></li>
+                <li><a href="#" data-hoodie-action="resetpassword">Reset Password</a></li>
+                <li><a href="#" data-hoodie-action="destroy">Clear local data</a></li>
+              </ul>
+            </span>
+          </div><!-- /.hoodie-account-signedout -->
+
+          <div class="hoodie-account-signedin">
+            Hello,
+            <span class="hoodie-username"><!-- username will be filled in here --></span>
+            <span class="btn-group">
+              <button class="btn btn-small btn-primary" data-hoodie-action="signout">Sign Out</button>
+              <button class="btn btn-small dropdown-toggle btn-primary" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="#" data-hoodie-action="changepassword">Change Password</a></li>
+                <li><a href="#" data-hoodie-action="changeusername">Change Username</a></li>
+                <li><a href="#" data-hoodie-action="destroy">Destroy Account</a></li>
+              </ul>
+            </span>
+          </div><!-- /.hoodie-account-signedin -->
+
+          <div class="hoodie-account-error">
+            Hello,
+            <span class="hoodie-username"><!-- username will be filled in here --></span>.
+            <span class="btn-group">
+              <button class="btn btn-small btn-danger" data-hoodie-action="signin">Authentication error: Sign in again</button>
+              <button class="btn btn-small dropdown-toggle btn-danger" data-toggle="dropdown">
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                <li><a href="#" data-hoodie-action="signout">Sign out</a></li>
+              </ul>
+            </span>
+          </div><!-- /.hoodie-account-error -->
+        </div>
+      </div>
+    </div>
+  </div>
 	<div class="row">
 		<div class="one-half column">
 			<h4>Grammar:</h4>
+        <div id='save'>
+          <input type='text' id='saveName' value="Enter name for file">
+          <button id='saveButton' class='btn btn-small btnprimary'>save</button>
+        </div>
+
+        <div id='load'>
+          <span class="btn-group">
+            <button class="btn btn-small btn-primary">load</button>
+            <button class="btn btn-small dropdown-toggle btn-primary" data-toggle="dropdown"> 
+              <span class="caret"></span>
+            </button>         
+            <ul id='files' class="dropdown-menu pull-right"></ul>
+          </span>
+        </div>
+
+
+
 			<textarea id="peged"> 
 sentence 
 = _ words:word+ _ { 
@@ -898,6 +969,20 @@ number
 		</div>
 		<div class="one-half column">
 			<h4>Input:</h4>
+        <div id='save2'>
+          <input type='text' id='save2Name' value="Enter name for file">
+          <button id='save2Button' class='btn btn-small btnprimary'>save</button>
+        </div>
+
+        <div id='load2'>
+          <span class="btn-group">
+            <button class="btn btn-small btn-primary">load</button>
+            <button class="btn btn-small dropdown-toggle btn-primary" data-toggle="dropdown"> 
+              <span class="caret"></span>
+            </button>         
+            <ul id='files2' class="dropdown-menu pull-right"></ul>
+          </span>
+        </div>
 
 <textarea id="ed">
 @fork-loop(
@@ -939,7 +1024,8 @@ document.getElementById('toc').innerHTML = marked(toc.join("\n"));
 
 ////////////////////////////////////////////////////////////////////////////////
 
-var peged = CodeMirror.fromTextArea(document.getElementById("peged"), {mode: "pegjs"});
+// XXX DO NOT CHANGE THIS VARIABLE NAME (accessing as global from another file)
+var peged = CodeMirror.fromTextArea(document.getElementById("peged"), {mode: "pegjs"}); 
 var peg_msg_div = document.getElementById("peg_msg");
 
 var ed;
@@ -961,6 +1047,7 @@ var ed_options = {
   }
 };
 
+// XXX DO NOT CHANGE THIS VARIABLE NAME (accessing as global from another file)
 ed = CodeMirror.fromTextArea(document.getElementById("ed"), ed_options);
 var ed_msg_div = document.getElementById("ed_msg");
 var out_div = document.getElementById("output");
@@ -1029,4 +1116,17 @@ parse();
 </script>
 
 </body>
+
+<script src="assets/vendor/jquery-2.1.0.min.js"></script>
+<script src="assets/vendor/bootstrap/bootstrap.js"></script>
+<script src="assets/js/codemirror.js"></script>
+<script src="assets/js/javascript.js"></script>
+
+<!-- Load the dynamic version of hoodie.js that includes all the plugin code-->
+<script src="/_api/_files/hoodie.js"></script>
+
+<script src="assets/vendor/hoodie.accountbar.bootstrap.js"></script>
+<script src="assets/vendor/bootstrap.modalform.js"></script>
+<script src="assets/js/main.js"></script>
+
 </html>

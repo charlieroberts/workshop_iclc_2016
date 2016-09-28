@@ -18,6 +18,13 @@
     "codemirror": "^5.16.0",
     "pegjs": "^0.9.0"
   },
+  "hoodie": {
+    "plugins": [
+      "hoodie-plugin-appconfig",
+      "hoodie-plugin-email",
+      "hoodie-plugin-users"
+    ]
+  },
   "dependencies": {
     "marked": "^0.3.5"
   }
